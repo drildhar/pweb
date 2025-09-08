@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Belajar Membuat Tabel dan Form</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            form {
+                border: 1px solid #ccc;
+                padding: 20px;
+                background: #f9f9f9;
+                max-width: 400px;
+            }
+            label {
+                display: block;
+                margin-bottom: 10px;
+            }
+            input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                box-sizing: border-box;
+                margin-top: 5px;
+            }
+            input[type="radio"] {
+                width: auto;
+                margin-right: 5px;
+            }
+            button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                margin-top: 10px;
+            }
+            button:hover {
+                background-color: #45a049;
+            }
+            h1 {
+                color: #3ece6e;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Tabel</h1>
+        <table border="1">
+            <tr>
+                <th rowspan="2">No</th>
+                <th rowspan="2">NPM</th>
+                <th rowspan="2">Nama</th>
+                <th colspan="2">Nilai</th>
+            </tr>
+            <tr>
+                <th>UTS</th>
+                <th>UAS</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>06.100.001</td>
+                <td>Amin A. Angkasa</td>
+                <td align="center">70</td>
+                <td align="center">80</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>06.100.002</td>
+                <td>Beni B. Bernardi</td>
+                <td align="center">70</td>
+                <td align="center">80</td>
+            </tr>
+        </table>
+        <h1>Form</h1>
+        <form>
+            <label>First Name: <br><input type="text" name="firstName" required></label>
+            <label>Last Name: <br><input type="text" name="lastName" required></label>
+            <label>Email: <br><input type="email" name="email" required></label>
+            <label>Password: <br><input type="password" name="password" required></label>
+            <label>Retype Password: <br><input type="password" name="retypePassword" required></label>
+            <label>Contact: <br><input type="tel" name="contact" required></label>
+            <label>Gender: <br>
+                <select>
+                    <option value="male"> Male
+                    <option value="female"> Female
+                </select>
+            </label>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
