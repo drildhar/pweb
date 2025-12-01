@@ -26,6 +26,9 @@ This repository contains various web programming assignments and projects:
 - **[Pertemuan 5/3 - Advanced Web Page](Pertemuan%205/3/index.html)**
   - Further web development enhancements
 
+- **[Pertemuan 6 - Modern Web Design](Pertemuan%206/index.html)**
+  - Responsive layout using Bootstrap 5 and custom CSS
+
 ### 🎯 Main Projects
 
 - **[ETS - E-Commerce Website](ETS/index.html)**
