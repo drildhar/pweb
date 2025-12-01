@@ -1,0 +1,348 @@
+<html>
+<head>
+    <title>Latihan 5 - Registration Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-color: #667eea;
+            --primary-dark: #5a6fd8;
+            --success-gradient: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            --success-color: #48bb78;
+            --shadow-primary: 0 10px 30px rgba(102, 126, 234, 0.15);
+            --shadow-secondary: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 40px rgba(102, 126, 234, 0.25);
+            --border-radius: 16px;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --input-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;       
+            height: 100vh;             
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: var(--font-family);
+            overflow: hidden;
+        }
+
+        .frame {
+            border: none;
+            width: 420px;              
+            border-radius: var(--border-radius);       
+            background: white;
+            overflow: hidden; 
+            box-shadow: var(--shadow-primary);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .frame:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .frame-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 24px 20px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .frame-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .frame-header:hover::before {
+            left: 100%;
+        }
+
+        .frame-content {
+            padding: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        label {
+            display: block;
+            margin: 24px 0 8px;
+            font-weight: 500;
+            text-align: left;
+            color: #2d3748;
+            font-size: 14px;
+            letter-spacing: 0.25px;
+        }
+
+        input[type="text"], 
+        input[type="NIM"], 
+        select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--input-radius);
+            box-sizing: border-box;
+            font-size: 16px;
+            font-family: var(--font-family);
+            color: #2d3748;
+            background: white;
+            transition: var(--transition);
+        }
+
+        input[type="text"]:focus, 
+        input[type="NIM"]:focus, 
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        input[type="text"]:hover, 
+        input[type="NIM"]:hover, 
+        select:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-secondary);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 16px center;
+            background-repeat: no-repeat;
+            background-size: 20px;
+        }
+
+        .tombol {
+            margin-top: 32px;
+            width: 100%;
+            padding: 16px;
+            background: var(--success-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--input-radius);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: var(--font-family);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tombol::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .tombol:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(72, 187, 120, 0.3);
+        }
+
+        .tombol:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .tombol:active {
+            transform: translateY(-1px);
+        }
+
+        .error {
+            color: #e53e3e;
+            font-size: 13px;
+            display: none;
+            margin-top: 6px;
+            font-weight: 500;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.error input,
+        .form-group.error select {
+            border-color: #e53e3e;
+            box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.1);
+        }
+
+        @media (max-width: 480px) {
+            .frame {
+                width: 90vw;
+                max-width: 420px;
+            }
+            
+            .frame-content {
+                padding: 24px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="frame-header">Registration Screen</div>
+        <div class="frame-content">
+            <form action="#" method="POST" onsubmit="return validasi()" name="formReg">
+                <div>
+                    <label>Nama Mahasiswa:</label>
+                    <input type="text" name="Nama" id="Nama" />
+                    <span id="errorNama" class="error">Nama lengkap harus diisi!</span>
+                </div>
+                <div>
+                    <label>NIM:</label>
+                    <input type="NIM" name="NIM" id="NIM" />
+                    <span id="errorNIM" class="error">NIM harus diisi dengan benar!</span>
+                </div>
+                <div>
+                    <label>Mata Kuliah:</label>
+                    <select name="Matkul" id="Matkul" onchange="updateDosen()">
+                        <option value="">Pilih Mata Kuliah</option>
+                        <option value="Pemrograman Berbasis Objek">Pemrograman Berbasis Objek</option>
+                        <option value="Konsep Pengembangan Perangkat Lunak">Konsep Pengembangam Perangkat Lunak</option>
+                        <option value="Pemrograman Web">Pemrograman Web</option>
+                        <option value="Jaringan Komputer">Jaringan Komputer</option>
+                    </select>
+                    <span id="errorMatkul" class="error">Mata Kuliah harus diisi!</span>
+                </div>
+                <div>
+                    <label>Dosen:</label>
+                    <select name="Dosen" id="Dosen">
+                        <option value="">Pilih Dosen</option>
+                    </select>
+                    <span id="errorDosen" class="error">Dosen harus diisi!</span>
+                </div>
+                <div>
+                    <input type="submit" value="Daftar" class="tombol">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function updateDosen() {
+            var dosenSelect = document.getElementById("Dosen");
+            var matkul = document.getElementById("Matkul").value;
+
+            dosenSelect.innerHTML = "<option value=''>Pilih Dosen</option>";
+
+            if (matkul === "Pemrograman Berbasis Objek") {
+                addOption(dosenSelect, "Fajar Baskoro", "Fajar Baskoro");
+                addOption(dosenSelect, "Rully Soelaiman", "Rully Soelaiman");
+            }
+            if (matkul === "Konsep Pengembangan Perangkat Lunak") {
+                addOption(dosenSelect, "Sarwosri", "Sarwosri");
+                addOption(dosenSelect, "Adhatus Solichah", "Adhatus Solichah");
+            }
+            if (matkul === "Pemrograman Web") {
+                addOption(dosenSelect, "Fajar Baskoro", "Fajar Baskoro");
+                addOption(dosenSelect, "Irfan Subakti", "Irfan Subakti");
+            }
+            if (matkul === "Jaringan Komputer") {
+                addOption(dosenSelect, "Baskoro Adi", "Baskoro Adi");
+                addOption(dosenSelect, "Royyana Muslim", "Royyana Muslim");
+                addOption(dosenSelect, "Radityo Anggoro", "Radityo Anggoro");
+            }
+        }
+
+        function addOption(selectbox, value, text) {
+            var optn = document.createElement("option");
+            optn.text = text;
+            optn.value = value;
+            selectbox.add(optn);
+        }
+
+        function validasi() {
+            var Nama = document.getElementById("Nama").value.trim();
+            var NIM = document.getElementById("NIM").value.trim();
+            var Matkul = document.getElementById("Matkul").value.trim();
+            var Dosen = document.getElementById("Dosen").value.trim();
+
+            document.getElementById("errorNama").style.display = "none";
+            document.getElementById("errorNIM").style.display = "none";
+            document.getElementById("errorMatkul").style.display = "none";
+            document.getElementById("errorDosen").style.display = "none";
+
+            var valid = true;
+
+            if (Nama === "") {
+                document.getElementById("errorNama").style.display = "inline";
+                valid = false;
+            }
+            if (NIM === "") {
+                document.getElementById("errorNIM").style.display = "inline";
+                valid = false;
+            }
+            if (Matkul === "") {
+                document.getElementById("errorMatkul").style.display = "inline";
+                valid = false;
+            }
+            if (Dosen === "") {
+                document.getElementById("errorDosen").style.display = "inline";
+                valid = false;
+            }
+
+            return valid;
+        }
+    </script>
+</body>
+</html>

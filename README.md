@@ -23,6 +23,9 @@ This repository contains various web programming assignments and projects:
 - **[Pertemuan 5/2 - Enhanced Web Page](Pertemuan%205/2/index.html)**
   - Advanced JavaScript functionality
 
+- **[Pertemuan 5/3 - Advanced Web Page](Pertemuan%205/3/index.html)**
+  - Further web development enhancements
+
 ### 🎯 Main Projects
 
 - **[ETS - E-Commerce Website](ETS/index.html)**
@@ -35,4 +38,4 @@ This repository contains various web programming assignments and projects:
 
 ---
 
-*Last updated: November 28, 2025*
+*Last updated: December 1, 2025*

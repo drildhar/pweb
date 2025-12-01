@@ -1,0 +1,485 @@
+<html>
+<head>
+    <title>Latihan 5 - Kode Pos Indonesia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-color: #667eea;
+            --primary-dark: #5a6fd8;
+            --success-gradient: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            --success-color: #48bb78;
+            --danger-color: #e53e3e;
+            --shadow-primary: 0 10px 30px rgba(102, 126, 234, 0.15);
+            --shadow-secondary: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 40px rgba(102, 126, 234, 0.25);
+            --shadow-table: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --border-radius: 16px;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --input-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;       
+            height: 100vh;             
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: var(--font-family);
+            overflow: hidden;
+        }
+
+        .frame {
+            border: none;
+            width: 520px;              
+            border-radius: var(--border-radius);       
+            background: white;
+            overflow: hidden; 
+            box-shadow: var(--shadow-primary);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .frame:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .frame-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 24px 20px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .frame-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .frame-header:hover::before {
+            left: 100%;
+        }
+
+        .frame-content {
+            padding: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        label {
+            display: block;
+            margin: 24px 0 8px;
+            font-weight: 500;
+            text-align: left;
+            color: #2d3748;
+            font-size: 14px;
+            letter-spacing: 0.25px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--input-radius);
+            box-sizing: border-box;
+            font-size: 16px;
+            font-family: var(--font-family);
+            color: #2d3748;
+            background: white;
+            transition: var(--transition);
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        input[type="text"]:hover, select:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-secondary);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 16px center;
+            background-repeat: no-repeat;
+            background-size: 20px;
+        }
+
+        input[type="text"]::placeholder {
+            color: #a0aec0;
+        }
+
+        .tombol {
+            margin-top: 32px;
+            width: 100%;
+            padding: 16px;
+            background: var(--success-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--input-radius);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: var(--font-family);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tombol::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .tombol:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(72, 187, 120, 0.3);
+        }
+
+        .tombol:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .tombol:active {
+            transform: translateY(-1px);
+        }
+
+        .error {
+            color: var(--danger-color);
+            font-size: 13px;
+            display: none;
+            margin-top: 6px;
+            font-weight: 500;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        #result {
+            margin-top: 24px;
+            font-size: 14px;
+            border-top: 2px solid #f7fafc;
+            padding-top: 24px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        #result table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: var(--input-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-table);
+            background: white;
+        }
+
+        #result th, #result td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        #result th {
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.25px;
+        }
+
+        #result tr:last-child td {
+            border-bottom: none;
+        }
+
+        #result tr:hover {
+            background-color: #f7fafc;
+            transition: background-color 0.2s ease;
+        }
+
+        #result tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        #result tr:nth-child(even):hover {
+            background-color: #f0f0f0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        .no-results {
+            color: var(--danger-color);
+            background: linear-gradient(135deg, #fed7d7 0%, #fbb6ce 100%);
+            padding: 20px;
+            border-radius: var(--input-radius);
+            text-align: center;
+            font-weight: 500;
+            border: 2px solid #feb2b2;
+        }
+
+        @media (max-width: 600px) {
+            .frame {
+                width: 95vw;
+                max-width: 520px;
+            }
+            
+            .frame-content {
+                padding: 24px 20px;
+            }
+
+            #result table {
+                font-size: 12px;
+            }
+
+            #result th, #result td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="frame-header"> Kode Pos Indonesia</div>
+        <div class="frame-content">
+            <form action="#" method="POST" onsubmit="return searchPostcode()" name="formReg">
+                <div>
+                    <label>Provinsi:</label>
+                    <select id="Category" onchange="updateKota()">
+                        <option value="">-- Pilih Provinsi --</option>
+                        <option value="Jawa Timur">Jawa Timur</option>
+                        <option value="Jawa Barat">Jawa Barat</option>
+                        <option value="Jawa Tengah">Jawa Tengah</option>
+                        <option value="Jakarta">Jakarta</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Kota/Kabupaten:</label>
+                    <select id="Subcategory">
+                        <option value="">-- Pilih Kota/Kabupaten --</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Masukkan Kode Pos:</label>
+                    <input type="text" id="Search" placeholder="Contoh: 60111"/>
+                    <span id="errorSearch" class="error">Kode pos harus diisi!</span>
+                </div>
+                <div>
+                    <input type="submit" value="Cari" class="tombol">
+                </div>
+            </form>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const data = {
+            "Jawa Timur": {
+                "Surabaya": [
+                    { kecamatan: "Sukolilo", kelurahan: "Keputih", kode: "60111" },
+                    { kecamatan: "Mulyorejo", kelurahan: "Kalisari", kode: "60112" },
+                    { kecamatan: "Mulyorejo", kelurahan: "Kejawaan Putih Tambak (Kejawen Putih Tambak)", kode: "60112" },
+                    { kecamatan: "Mulyorejo", kelurahan: "Dukuh Sutorejo", kode: "60113" },
+                    { kecamatan: "Mulyorejo", kelurahan: "Kalijudan", kode: "60114" },
+                    { kecamatan: "Mulyorejo", kelurahan: "Manyar Sabrangan", kode: "60115" },
+                    { kecamatan: "Sukolilo", kelurahan: "Gebang Putih", kode: "60117" },
+                    { kecamatan: "Sukolilo", kelurahan: "Klampis Ngasem", kode: "60117" },
+                    { kecamatan: "Sukolilo", kelurahan: "Menur Pumpungan", kode: "60118" },
+                    { kecamatan: "Sukolilo", kelurahan: "Nginden Jangkungan", kode: "60118" },
+                    { kecamatan: "Sukolilo", kelurahan: "Medokan Semampir", kode: "60119" },
+                    { kecamatan: "Sukolilo", kelurahan: "Semolowaru", kode: "60119" },
+                    { kecamatan: "Bulak", kelurahan: "Sukolilo Baru", kode: "60122" }
+                ],
+                "Malang": [
+                    { kecamatan: "Blimbing", kelurahan: "Balearjosari", kode: "65126" },
+                    { kecamatan: "Blimbing", kelurahan: "Polowijen", kode: "65125" },
+                    { kecamatan: "Lowokwaru", kelurahan: "Jatimulyo", kode: "65141" },
+                    { kecamatan: "Lowokwaru", kelurahan: "Tlogomas", kode: "65144" },
+                    { kecamatan: "Klojen", kelurahan: "Kauman", kode: "65119" }
+                ],
+                "Kediri": [
+                    { kecamatan: "Mojoroto", kelurahan: "Mrican", kode: "64111" },
+                    { kecamatan: "Mojoroto", kelurahan: "Tamanan", kode: "64117" },
+                    { kecamatan: "Pesantren", kelurahan: "Bangsal", kode: "64131" },
+                    { kecamatan: "Pesantren", kelurahan: "Burengan", kode: "64129" },
+                    { kecamatan: "Kota", kelurahan: "Dandangan", kode: "64122" }
+                ]
+            },
+            "Jawa Barat": {
+                "Bandung": [
+                    { kecamatan: "Coblong", kelurahan: "Dago", kode: "40135" },
+                    { kecamatan: "Coblong", kelurahan: "Lebak Gede", kode: "40132" },
+                    { kecamatan: "Cicendo", kelurahan: "Pasir Kaliki", kode: "40171" },
+                    { kecamatan: "Cicendo", kelurahan: "Arjuna", kode: "40172" },
+                    { kecamatan: "Sukajadi", kelurahan: "Pasteur", kode: "40161" }
+                ],
+                "Bekasi": [
+                    { kecamatan: "Bekasi Timur", kelurahan: "Duren Jaya", kode: "17111" },
+                    { kecamatan: "Bekasi Timur", kelurahan: "Aren Jaya", kode: "17112" },
+                    { kecamatan: "Bekasi Barat", kelurahan: "Bintara", kode: "17134" },
+                    { kecamatan: "Bekasi Barat", kelurahan: "Kranji", kode: "17135" },
+                    { kecamatan: "Bekasi Utara", kelurahan: "Harapan Baru", kode: "17123" }
+                ],
+                "Depok": [
+                    { kecamatan: "Beji", kelurahan: "Kemiri Muka", kode: "16423" },
+                    { kecamatan: "Beji", kelurahan: "Pondok Cina", kode: "16424" },
+                    { kecamatan: "Sukmajaya", kelurahan: "Abadijaya", kode: "16417" },
+                    { kecamatan: "Sukmajaya", kelurahan: "Mekar Jaya", kode: "16411" },
+                    { kecamatan: "Cimanggis", kelurahan: "Tugu", kode: "16451" }
+                ]
+            },
+            "Jawa Tengah": {
+                "Semarang": [
+                    { kecamatan: "Candisari", kelurahan: "Jatingaleh", kode: "50254" },
+                    { kecamatan: "Candisari", kelurahan: "Karanganyar Gunung", kode: "50253" },
+                    { kecamatan: "Gajahmungkur", kelurahan: "Sampangan", kode: "50232" },
+                    { kecamatan: "Gajahmungkur", kelurahan: "Bendungan", kode: "50233" },
+                    { kecamatan: "Banyumanik", kelurahan: "Pedalangan", kode: "50268" }
+                ],
+                "Solo": [
+                    { kecamatan: "Banjarsari", kelurahan: "Manahan", kode: "57139" },
+                    { kecamatan: "Banjarsari", kelurahan: "Keprabon", kode: "57132" },
+                    { kecamatan: "Laweyan", kelurahan: "Sondakan", kode: "57147" },
+                    { kecamatan: "Laweyan", kelurahan: "Pajang", kode: "57146" },
+                    { kecamatan: "Serengan", kelurahan: "Tipes", kode: "57154" }
+                ],
+                "Magelang": [
+                    { kecamatan: "Magelang Tengah", kelurahan: "Cacaban", kode: "56117" },
+                    { kecamatan: "Magelang Tengah", kelurahan: "Gelangan", kode: "56121" },
+                    { kecamatan: "Magelang Selatan", kelurahan: "Rejowinangun Selatan", kode: "56132" },
+                    { kecamatan: "Magelang Selatan", kelurahan: "Tidar Selatan", kode: "56125" },
+                    { kecamatan: "Magelang Utara", kelurahan: "Potrobangsan", kode: "56116" }
+                ]
+            },
+            "Jakarta": {
+                "Jakarta Pusat": [
+                    { kecamatan: "Gambir", kelurahan: "Cideng", kode: "10150" },
+                    { kecamatan: "Gambir", kelurahan: "Petojo Utara", kode: "10130" },
+                    { kecamatan: "Menteng", kelurahan: "Pegangsaan", kode: "10320" },
+                    { kecamatan: "Menteng", kelurahan: "Menteng", kode: "10340" },
+                    { kecamatan: "Tanah Abang", kelurahan: "Kebon Melati", kode: "10230" }
+                ],
+                "Jakarta Selatan": [
+                    { kecamatan: "Kebayoran Baru", kelurahan: "Gunung", kode: "12120" },
+                    { kecamatan: "Kebayoran Baru", kelurahan: "Cipete Utara", kode: "12150" },
+                    { kecamatan: "Mampang Prapatan", kelurahan: "Tegal Parang", kode: "12790" },
+                    { kecamatan: "Pasar Minggu", kelurahan: "Pejaten Barat", kode: "12510" },
+                    { kecamatan: "Pasar Minggu", kelurahan: "Ragunan", kode: "12550" }
+                ],
+                "Jakarta Timur": [
+                    { kecamatan: "Cakung", kelurahan: "Penggilingan", kode: "13940" },
+                    { kecamatan: "Cakung", kelurahan: "Jatinegara", kode: "13930" },
+                    { kecamatan: "Matraman", kelurahan: "Palmeriam", kode: "13140" },
+                    { kecamatan: "Matraman", kelurahan: "Utan Kayu Selatan", kode: "13120" },
+                    { kecamatan: "Duren Sawit", kelurahan: "Pondok Bambu", kode: "13430" }
+                ]
+            }
+        };
+
+        function updateKota() {
+            const provinsi = document.getElementById("Category").value;
+            const kotaSelect = document.getElementById("Subcategory");
+            kotaSelect.innerHTML = "<option value=''>-- Pilih Kota/Kabupaten --</option>";
+            if (provinsi && data[provinsi]) {
+                Object.keys(data[provinsi]).forEach(kota => {
+                    const opt = document.createElement("option");
+                    opt.value = kota;
+                    opt.textContent = kota;
+                    kotaSelect.appendChild(opt);
+                });
+            }
+        }
+
+        function searchPostcode() {
+            const provinsi = document.getElementById("Category").value;
+            const kota = document.getElementById("Subcategory").value;
+            const search = document.getElementById("Search").value.trim();
+            const errorSearch = document.getElementById("errorSearch");
+            const resultDiv = document.getElementById("result");
+
+            errorSearch.style.display = "none";
+            resultDiv.innerHTML = "";
+
+            if (search === "") {
+                errorSearch.style.display = "inline";
+                return false;
+            }
+
+            let results = [];
+            if (provinsi && kota && data[provinsi] && data[provinsi][kota]) {
+                results = data[provinsi][kota].filter(item => item.kode === search);
+            }
+
+            if (results.length > 0) {
+                let table = "<table><tr><th>Kecamatan</th><th>Kelurahan</th><th>Kode Pos</th></tr>";
+                results.forEach(r => {
+                    table += `<tr><td>${r.kecamatan}</td><td>${r.kelurahan}</td><td>${r.kode}</td></tr>`;
+                });
+                table += "</table>";
+                resultDiv.innerHTML = table;
+            } else {
+                resultDiv.innerHTML = "<p style='color:red;'>Kode pos tidak ditemukan!</p>";
+            }
+
+            return false;
+        }
+    </script>
+</body>
+</html>
