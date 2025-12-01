@@ -29,6 +29,10 @@ This repository contains various web programming assignments and projects:
 - **[Pertemuan 6 - Modern Web Design](Pertemuan%206/index.html)**
   - Responsive layout using Bootstrap 5 and custom CSS
 
+- **[Pertemuan 7 - AJAX Contact Form](Pertemuan%207/index.html)**
+  - AJAX-based contact form application with full-stack integration
+  - Features modern JavaScript with async/await and PHP backend processing
+
 ### 🎯 Main Projects
 
 - **[ETS - E-Commerce Website](ETS/index.html)**
