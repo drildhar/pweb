@@ -33,6 +33,12 @@ This repository contains various web programming assignments and projects:
   - AJAX-based contact form application with full-stack integration
   - Features modern JavaScript with async/await and PHP backend processing
 
+- **[Pertemuan 9 - Student Management System](Pertemuan%209/index.php)**
+  - PHP-based student registration and management system
+  - Features CRUD operations (Create, Read, Update, Delete)
+  - Includes database integration with MySQL
+  - Modern responsive design with PHP and HTML
+
 ### 🎯 Main Projects
 
 - **[ETS - E-Commerce Website](ETS/index.html)**
